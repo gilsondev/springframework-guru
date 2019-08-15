@@ -2,6 +2,7 @@ package guru.springframework.didemo.controllers;
 
 import guru.springframework.didemo.services.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -17,15 +18,16 @@ public class PropertyInjectedController {
     * - Rename the property name:
     * public GreetingService greetingServiceImpl;
     *
+    * Without @Qualifier, the bean that have the
+    * @Primary annotation, is the main concrete class
+    * from Spring Context is create a instance and
+    * inject then.
     */
     @Autowired
+    @Qualifier("greetingServiceImpl")
     public GreetingService greetingServiceImpl;
 
     public String sayHello() {
         return greetingServiceImpl.sayGreeting();
-    }
-
-    public GreetingService getGreetingService() {
-        return greetingServiceImpl;
     }
 }
